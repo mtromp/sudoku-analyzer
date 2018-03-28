@@ -25,13 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        sudokulibrary.cpp \
-    mainwindow.cpp
+    sudokulibrary.cpp \
+    mainwindow.cpp \
+    sudokucell.cpp
 
 HEADERS += \
         sudokulibrary.h \
         sudokulibrary_global.h \ 
-    mainwindow.h
+    mainwindow.h \
+    sudokucell.h
 
 unix {
     target.path = /usr/lib
