@@ -51,3 +51,19 @@ TEST(TestSudokuCell, DisablingTheLastValueFromACellRetainsValueAsAvailable)
     EXPECT_EQ(-1, cell.DisableValue(9));
     EXPECT_EQ(expectedVector, cell.AvailableValues());
 }
+
+TEST(TestSudokuCell, SettingAValueReturnsOneAvailableValue)
+{
+    SudokuCell cell;
+    std::vector<int> expectedVector = {4};
+    EXPECT_EQ(0, cell.SetValue(4));
+
+    EXPECT_EQ(expectedVector, cell.AvailableValues());
+}
+
+TEST(TestSudokuCell, AttemptingToSetDisabledValueReturnsError)
+{
+    SudokuCell cell;
+    cell.DisableValue(4);
+    EXPECT_EQ(-1, cell.SetValue(4));
+}

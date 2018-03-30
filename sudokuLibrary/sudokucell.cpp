@@ -28,3 +28,20 @@ int SudokuCell::DisableValue(int value)
     }
     return 0;
 }
+
+int SudokuCell::SetValue(int value)
+{
+    if (!this->availableValues[value]){
+        return -1;
+    }
+    for (int i = 1; i <= 10; i++)
+    {
+        if (i == value)
+        {
+            this->availableValues[i] = true;
+        } else {
+            this->availableValues[i] = false;
+        }
+    }
+    return 0;
+}

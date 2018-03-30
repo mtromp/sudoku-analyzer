@@ -10,6 +10,7 @@ public:
     SudokuCell();
     std::vector<int> AvailableValues();
     int DisableValue(int value);
+    int SetValue(int value);
 
 private:
     std::array<bool, 10> availableValues;
