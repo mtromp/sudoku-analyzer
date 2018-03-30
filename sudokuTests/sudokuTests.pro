@@ -8,4 +8,8 @@ CONFIG -= qt
 
 HEADERS +=     tst_sudokutestcase.h
 
-SOURCES +=     main.cpp
+SOURCES +=     main.cpp \
+    tst_sudokucell.cpp
+
+INCLUDEPATH += $$PWD/../sudokuLibrary
+LIBS += -L$$OUT_PWD/../sudokuLibrary -lsudokuLibrary
