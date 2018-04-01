@@ -1,3 +1,4 @@
+GOOGLETEST_DIR = /Users/Shared/gitrepositories/googletest/
 include(gtest_dependency.pri)
 
 TEMPLATE = app
