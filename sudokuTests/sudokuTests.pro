@@ -5,12 +5,13 @@ TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG += thread
-CONFIG -= qt
 
-HEADERS +=     tst_sudokutestcase.h
+HEADERS +=  tst_sudokutestcase.h
 
-SOURCES +=     main.cpp \
-    tst_sudokucell.cpp
+SOURCES +=  main.cpp \
+    tst_sudokucell.cpp \
+    tst_sudokucolumn.cpp
 
 INCLUDEPATH += $$PWD/../sudokuLibrary
 LIBS += -L$$OUT_PWD/../sudokuLibrary -lsudokuLibrary
+

@@ -6,7 +6,7 @@
 
 QT += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+QT += core gui
 
 TARGET = sudokuLibrary
 TEMPLATE = lib
@@ -27,13 +27,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     sudokulibrary.cpp \
     mainwindow.cpp \
-    sudokucell.cpp
+    sudokucell.cpp \
+    sudokucolumn.cpp
 
 HEADERS += \
-        sudokulibrary.h \
-        sudokulibrary_global.h \ 
+    sudokulibrary.h \
+    sudokulibrary_global.h \
     mainwindow.h \
-    sudokucell.h
+    sudokucell.h \
+    sudokucolumn.h
 
 unix {
     target.path = /usr/lib

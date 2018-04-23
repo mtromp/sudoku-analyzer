@@ -8,9 +8,10 @@ class SudokuCell
 {
 public:
     SudokuCell();
-    std::vector<int> AvailableValues();
-    int DisableValue(int value);
-    int SetValue(int value);
+    virtual ~SudokuCell(){};
+    virtual std::vector<int> AvailableValues();
+    virtual int DisableValue(int value);
+    virtual int SetValue(int value);
 
 private:
     std::array<bool, 10> availableValues;
