@@ -8,7 +8,7 @@ SudokuCell::SudokuCell()
 std::vector<int> SudokuCell::AvailableValues()
 {
     std::vector<int> valueVector;
-    for (int i = 1; i <= 10; i++)
+    for (int i = 1; i < 10; i++)
     {
         if (this->availableValues[i])
         {
@@ -34,7 +34,7 @@ int SudokuCell::SetValue(int value)
     if (!this->availableValues[value]){
         return -1;
     }
-    for (int i = 1; i <= 10; i++)
+    for (int i = 1; i < 10; i++)
     {
         if (i == value)
         {
