@@ -30,24 +30,11 @@ public:
 TEST(TestSudokuColumn, ColumnSlotDisablesValueInAllOtherCells)
 {
     std::vector<SudokuCell*> nineCells;
-    MockSudokuCell cell1;
-    MockSudokuCell cell2;
-    MockSudokuCell cell3;
-    MockSudokuCell cell4;
-    MockSudokuCell cell5;
-    MockSudokuCell cell6;
-    MockSudokuCell cell7;
-    MockSudokuCell cell8;
-    MockSudokuCell cell9;
-    nineCells.push_back(&cell1);
-    nineCells.push_back(&cell2);
-    nineCells.push_back(&cell3);
-    nineCells.push_back(&cell4);
-    nineCells.push_back(&cell5);
-    nineCells.push_back(&cell6);
-    nineCells.push_back(&cell7);
-    nineCells.push_back(&cell8);
-    nineCells.push_back(&cell9);
+    for (int i = 0; i < 9; i++)
+    {
+        MockSudokuCell* cell = new MockSudokuCell;
+        nineCells.push_back(&(*cell));
+    }
 
     SudokuColumn column(nineCells);
 
