@@ -26,28 +26,20 @@ TEST(TestSudokuCell, DisablingAValueRemovesItFromTheAvailableValuesList)
 TEST(TestSudokuCell, DisablingTheLastValueFromACellReturnsAnError)
 {
     SudokuCell cell;
-    EXPECT_EQ(0, cell.DisableValue(1));
-    EXPECT_EQ(0, cell.DisableValue(2));
-    EXPECT_EQ(0, cell.DisableValue(3));
-    EXPECT_EQ(0, cell.DisableValue(4));
-    EXPECT_EQ(0, cell.DisableValue(5));
-    EXPECT_EQ(0, cell.DisableValue(6));
-    EXPECT_EQ(0, cell.DisableValue(7));
-    EXPECT_EQ(0, cell.DisableValue(8));
+    for (int i = 1; i < 9; i++)
+    {
+        EXPECT_EQ(0, cell.DisableValue(i));
+    }
     EXPECT_EQ(-1, cell.DisableValue(9));
 }
 TEST(TestSudokuCell, DisablingTheLastValueFromACellRetainsValueAsAvailable)
 {
     SudokuCell cell;
     std::vector<int> expectedVector = {9};
-    EXPECT_EQ(0, cell.DisableValue(1));
-    EXPECT_EQ(0, cell.DisableValue(2));
-    EXPECT_EQ(0, cell.DisableValue(3));
-    EXPECT_EQ(0, cell.DisableValue(4));
-    EXPECT_EQ(0, cell.DisableValue(5));
-    EXPECT_EQ(0, cell.DisableValue(6));
-    EXPECT_EQ(0, cell.DisableValue(7));
-    EXPECT_EQ(0, cell.DisableValue(8));
+    for (int i = 1; i < 9; i++)
+    {
+        EXPECT_EQ(0, cell.DisableValue(i));
+    }
     EXPECT_EQ(-1, cell.DisableValue(9));
     EXPECT_EQ(expectedVector, cell.AvailableValues());
 }
