@@ -4,14 +4,21 @@
 #include <array>
 #include <vector>
 
-class SudokuCell
+#include <QObject>
+
+class SudokuCell : public QObject
 {
+    Q_OBJECT
+
 public:
     SudokuCell();
     virtual ~SudokuCell(){};
     virtual std::vector<int> AvailableValues();
     virtual int DisableValue(int value);
     virtual int SetValue(int value);
+
+signals:
+    void CellChanged(int value);
 
 private:
     std::array<bool, 10> availableValues;

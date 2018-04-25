@@ -1,5 +1,7 @@
 #include "sudokucell.h"
 
+#include <QSignalSpy>
+
 #include <vector>
 #include <gtest/gtest.h>
 
@@ -58,4 +60,15 @@ TEST(TestSudokuCell, AttemptingToSetDisabledValueReturnsError)
     SudokuCell cell;
     cell.DisableValue(4);
     EXPECT_EQ(-1, cell.SetValue(4));
+}
+
+TEST(TestSudokuCell, DisablingValueGeneratesCellChangedSignal)
+{
+    SudokuCell cell;
+    QSignalSpy spy(&cell, SIGNAL(CellChanged(int)));
+    int ExpectedDisableValue = 4;
+    cell.DisableValue(ExpectedDisableValue);
+    EXPECT_EQ(1, spy.count());
+    QList<QVariant> arguments = spy.takeFirst();
+    EXPECT_EQ(ExpectedDisableValue, arguments.at(0).toInt());
 }
