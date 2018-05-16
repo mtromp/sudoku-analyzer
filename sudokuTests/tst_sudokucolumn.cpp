@@ -25,6 +25,7 @@ public:
     MOCK_METHOD0(AvailableValues, std::vector<int>());
     MOCK_METHOD1(DisableValue, int(int value));
     MOCK_METHOD1(SetValue, int(int value));
+    virtual ~MockSudokuCell(){}
 };
 
 TEST(TestSudokuColumn, ColumnSlotDisablesValueInAllOtherCells)
@@ -44,4 +45,9 @@ TEST(TestSudokuColumn, ColumnSlotDisablesValueInAllOtherCells)
     }
     column.CellValueSet(4);
 
+    for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
+    {
+        MockSudokuCell* cell = (reinterpret_cast<MockSudokuCell*>(*it));
+        delete cell;
+    }
 }
