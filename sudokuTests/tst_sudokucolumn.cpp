@@ -28,7 +28,7 @@ public:
     virtual ~MockSudokuCell(){}
 };
 
-TEST(TestSudokuColumn, ColumnSlotDisablesValueInAllOtherCells)
+TEST(TestSudokuColumn, ColumnCellValueSetDisablesValueInAllCells)
 {
     std::vector<SudokuCell*> nineCells;
     for (int i = 0; i < 9; i++)
@@ -44,6 +44,35 @@ TEST(TestSudokuColumn, ColumnSlotDisablesValueInAllOtherCells)
         EXPECT_CALL(*(reinterpret_cast<MockSudokuCell*>(*it)), DisableValue(4)).Times(AtLeast(1));
     }
     column.CellValueSet(4);
+
+    for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
+    {
+        MockSudokuCell* cell = (reinterpret_cast<MockSudokuCell*>(*it));
+        delete cell;
+    }
+}
+
+TEST(TestSudokuColumn, ColumnCellValueSetCapturesColumnFixedValues)
+{
+    int expectedColumnFixedValue = 5;
+    std::vector<int> expectedVector = {expectedColumnFixedValue};
+    std::vector<SudokuCell*> nineCells;
+    for (int i = 0; i < 9; i++)
+    {
+        MockSudokuCell* cell = new MockSudokuCell;
+        nineCells.push_back(&(*cell));
+    }
+
+    SudokuColumn column(nineCells);
+
+    for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
+    {
+        EXPECT_CALL(*(reinterpret_cast<MockSudokuCell*>(*it)),
+                      DisableValue(expectedColumnFixedValue)).Times(AtLeast(1));
+    }
+    column.CellValueSet(expectedColumnFixedValue);
+
+    EXPECT_EQ(expectedVector, column.FixedValues());
 
     for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
     {

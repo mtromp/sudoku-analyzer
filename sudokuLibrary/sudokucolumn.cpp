@@ -4,6 +4,7 @@
 SudokuColumn::SudokuColumn(std::vector<SudokuCell*> nineCells, QObject *parent) : QObject(parent)
 {
     this->cells = nineCells;
+    this->fixedValues = {{false,false,false,false,false,false,false,false,false,false}};
 }
 
 void SudokuColumn::CellValueSet(int Value)
@@ -12,4 +13,23 @@ void SudokuColumn::CellValueSet(int Value)
     {
         reinterpret_cast<SudokuCell*>(*it)->DisableValue(Value);
     }
+    if (!this->fixedValues[Value])
+    {
+        this->fixedValues[Value] = true;
+    }
 }
+
+std::vector<int> SudokuColumn::FixedValues()
+{
+    std::vector<int> fixedVector;
+    for (int i = 1; i < 10; i++)
+    {
+        if (this->fixedValues[i])
+        {
+            fixedVector.push_back(i);
+        }
+    }
+
+    return fixedVector;
+}
+
