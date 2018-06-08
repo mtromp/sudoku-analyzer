@@ -124,7 +124,7 @@ TEST_F(SudokuColumnTest, FixedValueNotSetIfCellReturnsDisableValueError)
 TEST_F(SudokuColumnTest, CellSetValueReturnsErrorIfCellReturnsDisableValueError)
 {
     int willNotSetValue = 5;
-    std::vector<int> expectedVector = {};
+
     SudokuColumn column(nineCells);
 
     int iteratorCount = 0;

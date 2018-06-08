@@ -10,11 +10,17 @@ SudokuRow::SudokuRow(std::vector<SudokuCell*> nineCells, QObject *parent) : QObj
 int SudokuRow::CellValueSet(int value)
 {
     int retVal = 0;
+    QObject* signalingObject = this->sender();
     if (!this->fixedValues[value])
     {
         for (auto it = this->cells.begin(); it != this->cells.end(); ++it)
         {
-            if (0 != reinterpret_cast<SudokuCell*>(*it)->DisableValue(value))
+            SudokuCell* cell = reinterpret_cast<SudokuCell*>(*it);
+            if (cell == signalingObject)
+            {
+                continue;
+            }
+            if (0 != cell->DisableValue(value))
             {
                 retVal = -1;
             };
@@ -25,4 +31,18 @@ int SudokuRow::CellValueSet(int value)
         }
     }
     return retVal;
+}
+
+std::vector<int> SudokuRow::FixedValues()
+{
+    std::vector<int> fixedVector;
+    for (int i = 1; i < 10; i++)
+    {
+        if (this->fixedValues[i])
+        {
+            fixedVector.push_back(i);
+        }
+    }
+
+    return fixedVector;
 }

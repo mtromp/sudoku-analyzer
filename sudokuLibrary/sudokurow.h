@@ -14,6 +14,8 @@ class SudokuRow : public QObject
 public:
     explicit SudokuRow(std::vector<SudokuCell*> nineCells, QObject *parent = nullptr);
 
+    virtual std::vector<int> FixedValues();
+
 public slots:
     int CellValueSet(int value);
 

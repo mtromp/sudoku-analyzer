@@ -46,4 +46,3 @@ std::vector<int> SudokuColumn::FixedValues()
 
     return fixedVector;
 }
-
