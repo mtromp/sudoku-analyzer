@@ -82,7 +82,6 @@ TEST_F(SudokuColumnTest, ColumnCellValueSetCapturesColumnFixedValues)
 TEST_F(SudokuColumnTest, ColumnCellValueSetDoesNotCallDisableValueWhenAlreadyFixed)
 {
     int expectedColumnFixedValue = 5;
-    std::vector<int> expectedVector = {expectedColumnFixedValue};
 
     SudokuColumn column(nineCells);
 
