@@ -7,17 +7,24 @@
 
 using namespace testing;
 
-TEST(TestSudokuCell, SudokuCellReturnsAvailableValues)
+class SudokuCellTest : public Test
 {
+protected:
+    SudokuCellTest() : cell(){}
+    ~SudokuCellTest() {}
+
     SudokuCell cell;
+};
+
+TEST_F(SudokuCellTest, SudokuCellReturnsAvailableValues)
+{
     std::vector<int> expectedArray = {1,2,3,4,5,6,7,8,9};
 
     EXPECT_EQ(expectedArray, cell.AvailableValues());
 }
 
-TEST(TestSudokuCell, DisablingAValueRemovesItFromTheAvailableValuesList)
+TEST_F(SudokuCellTest, DisablingAValueRemovesItFromTheAvailableValuesList)
 {
-    SudokuCell cell;
     std::vector<int> expectedArray = {1,2,3,5,6,7,8,9};
 
     cell.DisableValue(4);
@@ -25,18 +32,17 @@ TEST(TestSudokuCell, DisablingAValueRemovesItFromTheAvailableValuesList)
     EXPECT_EQ(expectedArray, cell.AvailableValues());
 }
 
-TEST(TestSudokuCell, DisablingTheLastValueFromACellReturnsAnError)
+TEST_F(SudokuCellTest, DisablingTheLastValueFromACellReturnsAnError)
 {
-    SudokuCell cell;
     for (int i = 1; i < 9; i++)
     {
         EXPECT_EQ(0, cell.DisableValue(i));
     }
     EXPECT_EQ(-1, cell.DisableValue(9));
 }
-TEST(TestSudokuCell, DisablingTheLastValueFromACellRetainsValueAsAvailable)
+
+TEST_F(SudokuCellTest, DisablingTheLastValueFromACellRetainsValueAsAvailable)
 {
-    SudokuCell cell;
     std::vector<int> expectedVector = {9};
     for (int i = 1; i < 9; i++)
     {
@@ -46,18 +52,16 @@ TEST(TestSudokuCell, DisablingTheLastValueFromACellRetainsValueAsAvailable)
     EXPECT_EQ(expectedVector, cell.AvailableValues());
 }
 
-TEST(TestSudokuCell, SettingAValueReturnsOneAvailableValue)
+TEST_F(SudokuCellTest, SettingAValueReturnsOneAvailableValue)
 {
-    SudokuCell cell;
     std::vector<int> expectedVector = {4};
     EXPECT_EQ(0, cell.SetValue(4));
 
     EXPECT_EQ(expectedVector, cell.AvailableValues());
 }
 
-TEST(TestSudokuCell, SettingAValueGeneratesCellValueSetSignal)
+TEST_F(SudokuCellTest, SettingAValueGeneratesCellValueSetSignal)
 {
-    SudokuCell cell;
     QSignalSpy spy(&cell, SIGNAL(CellValueSet(int)));
     int ExpectedSetValue = 5;
     cell.SetValue(ExpectedSetValue);
@@ -66,16 +70,14 @@ TEST(TestSudokuCell, SettingAValueGeneratesCellValueSetSignal)
     EXPECT_EQ(ExpectedSetValue, arguments.at(0).toInt());
 }
 
-TEST(TestSudokuCell, AttemptingToSetDisabledValueReturnsError)
+TEST_F(SudokuCellTest, AttemptingToSetDisabledValueReturnsError)
 {
-    SudokuCell cell;
     cell.DisableValue(4);
     EXPECT_EQ(-1, cell.SetValue(4));
 }
 
-TEST(TestSudokuCell, DisablingValueGeneratesCellValueDisabledSignal)
+TEST_F(SudokuCellTest, DisablingValueGeneratesCellValueDisabledSignal)
 {
-    SudokuCell cell;
     QSignalSpy spy(&cell, SIGNAL(CellValueDisabled(int)));
     int ExpectedDisableValue = 4;
     cell.DisableValue(ExpectedDisableValue);

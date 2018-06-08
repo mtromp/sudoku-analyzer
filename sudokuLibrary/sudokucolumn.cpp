@@ -7,15 +7,16 @@ SudokuColumn::SudokuColumn(std::vector<SudokuCell*> nineCells, QObject *parent) 
     this->fixedValues = {{false,false,false,false,false,false,false,false,false,false}};
 }
 
-void SudokuColumn::CellValueSet(int Value)
+void SudokuColumn::CellValueSet(int value)
 {
-    for (auto it = this->cells.begin(); it != this->cells.end(); ++it)
+
+    if (!this->fixedValues[value])
     {
-        reinterpret_cast<SudokuCell*>(*it)->DisableValue(Value);
-    }
-    if (!this->fixedValues[Value])
-    {
-        this->fixedValues[Value] = true;
+        for (auto it = this->cells.begin(); it != this->cells.end(); ++it)
+        {
+            reinterpret_cast<SudokuCell*>(*it)->DisableValue(value);
+        }
+        this->fixedValues[value] = true;
     }
 }
 

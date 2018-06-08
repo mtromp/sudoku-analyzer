@@ -18,7 +18,7 @@ public:
 signals:
 
 public slots:
-    void CellValueSet(int Value);
+    void CellValueSet(int value);
 
 private:
     std::vector<SudokuCell*> cells;
