@@ -44,5 +44,6 @@ int SudokuCell::SetValue(int value)
             this->availableValues[i] = false;
         }
     }
+    emit CellValueSet(value);
     return 0;
 }

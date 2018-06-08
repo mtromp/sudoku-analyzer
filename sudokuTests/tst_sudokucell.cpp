@@ -55,6 +55,17 @@ TEST(TestSudokuCell, SettingAValueReturnsOneAvailableValue)
     EXPECT_EQ(expectedVector, cell.AvailableValues());
 }
 
+TEST(TestSudokuCell, SettingAValueGeneratesCellValueSetSignal)
+{
+    SudokuCell cell;
+    QSignalSpy spy(&cell, SIGNAL(CellValueSet(int)));
+    int ExpectedSetValue = 5;
+    cell.SetValue(ExpectedSetValue);
+    EXPECT_EQ(1, spy.count());
+    QList<QVariant> arguments = spy.takeFirst();
+    EXPECT_EQ(ExpectedSetValue, arguments.at(0).toInt());
+}
+
 TEST(TestSudokuCell, AttemptingToSetDisabledValueReturnsError)
 {
     SudokuCell cell;

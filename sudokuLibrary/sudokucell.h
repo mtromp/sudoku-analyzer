@@ -19,6 +19,7 @@ public:
 
 signals:
     void CellValueDisabled(int value);
+    void CellValueSet(int value);
 
 private:
     std::array<bool, 10> availableValues;
