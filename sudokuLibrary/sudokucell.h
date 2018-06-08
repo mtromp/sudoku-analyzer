@@ -12,7 +12,7 @@ class SudokuCell : public QObject
 
 public:
     SudokuCell();
-    virtual ~SudokuCell(){};
+    virtual ~SudokuCell(){}
     virtual std::vector<int> AvailableValues();
     virtual int DisableValue(int value);
     virtual int SetValue(int value);
