@@ -18,7 +18,7 @@ public:
     virtual int SetValue(int value);
 
 signals:
-    void CellChanged(int value);
+    void CellValueDisabled(int value);
 
 private:
     std::array<bool, 10> availableValues;

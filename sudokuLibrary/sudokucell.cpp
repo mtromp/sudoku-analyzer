@@ -26,7 +26,7 @@ int SudokuCell::DisableValue(int value)
         this->availableValues[value] = true;
         return -1;
     }
-    emit CellChanged(value);
+    emit CellValueDisabled(value);
     return 0;
 }
 

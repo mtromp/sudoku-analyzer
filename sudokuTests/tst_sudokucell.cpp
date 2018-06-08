@@ -62,10 +62,10 @@ TEST(TestSudokuCell, AttemptingToSetDisabledValueReturnsError)
     EXPECT_EQ(-1, cell.SetValue(4));
 }
 
-TEST(TestSudokuCell, DisablingValueGeneratesCellChangedSignal)
+TEST(TestSudokuCell, DisablingValueGeneratesCellValueDisabledSignal)
 {
     SudokuCell cell;
-    QSignalSpy spy(&cell, SIGNAL(CellChanged(int)));
+    QSignalSpy spy(&cell, SIGNAL(CellValueDisabled(int)));
     int ExpectedDisableValue = 4;
     cell.DisableValue(ExpectedDisableValue);
     EXPECT_EQ(1, spy.count());
