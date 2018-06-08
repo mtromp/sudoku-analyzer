@@ -10,11 +10,17 @@ SudokuColumn::SudokuColumn(std::vector<SudokuCell*> nineCells, QObject *parent) 
 int SudokuColumn::CellValueSet(int value)
 {
     int retVal = 0;
+    QObject* signalingObject = this->sender();
     if (!this->fixedValues[value])
     {
         for (auto it = this->cells.begin(); it != this->cells.end(); ++it)
         {
-            if (0 != reinterpret_cast<SudokuCell*>(*it)->DisableValue(value))
+            SudokuCell* cell = reinterpret_cast<SudokuCell*>(*it);
+            if (cell == signalingObject)
+            {
+                continue;
+            }
+            if (0 != cell->DisableValue(value))
             {
                 retVal = -1;
             };

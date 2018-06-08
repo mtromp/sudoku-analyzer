@@ -28,14 +28,16 @@ SOURCES += \
     sudokulibrary.cpp \
     mainwindow.cpp \
     sudokucell.cpp \
-    sudokucolumn.cpp
+    sudokucolumn.cpp \
+    sudokurow.cpp
 
 HEADERS += \
     sudokulibrary.h \
     sudokulibrary_global.h \
     mainwindow.h \
     sudokucell.h \
-    sudokucolumn.h
+    sudokucolumn.h \
+    sudokurow.h
 
 unix {
     target.path = /usr/lib
