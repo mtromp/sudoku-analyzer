@@ -93,3 +93,30 @@ TEST_F(SudokuColumnTest, ColumnCellValueSetDoesNotCallDisableValueWhenAlreadyFix
     column.CellValueSet(expectedColumnFixedValue);
     column.CellValueSet(expectedColumnFixedValue);
 }
+
+TEST_F(SudokuColumnTest, FixedValueNotSetIfCellReturnsDisableValueError)
+{
+    int willNotSetValue = 5;
+    std::vector<int> expectedVector = {};
+    SudokuColumn column(nineCells);
+
+    int iteratorCount = 0;
+    for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
+    {
+        if (willNotSetValue == iteratorCount)
+        {
+            EXPECT_CALL(*(reinterpret_cast<MockSudokuCell*>(*it)),
+                        DisableValue(willNotSetValue)).Times(AtLeast(1))
+                    .WillRepeatedly(Return(-1));
+
+        } else {
+            EXPECT_CALL(*(reinterpret_cast<MockSudokuCell*>(*it)),
+                        DisableValue(willNotSetValue)).Times(AtLeast(1));
+        }
+        iteratorCount++;
+    }
+    column.CellValueSet(willNotSetValue);
+
+
+    EXPECT_EQ(expectedVector, column.FixedValues());
+}
