@@ -16,8 +16,8 @@ SOURCES +=  main.cpp \
     tst_sudokucell.cpp \
     tst_sudokucolumn.cpp \
     tst_sudokurow.cpp \
-    tst_cellcolumnintegration.cpp \
-    tst_sudokucellcontainer.cpp
+    tst_sudokucellcontainer.cpp \
+    tst_cellcontainerintegration.cpp
 
 INCLUDEPATH += $$PWD/../sudokuLibrary
 LIBS += -L$$OUT_PWD/../sudokuLibrary -lsudokuLibrary

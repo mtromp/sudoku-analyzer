@@ -13,6 +13,7 @@ class SudokuCellContainer : public QObject
     Q_OBJECT
 public:
     explicit SudokuCellContainer(std::vector<SudokuCell*> nineCells, QObject *parent = nullptr);
+    virtual ~SudokuCellContainer(){}
 
     virtual std::vector<int> FixedValues();
 signals:
