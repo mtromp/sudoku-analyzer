@@ -3,7 +3,6 @@
 
 #include "sudokucellcontainer.h"
 
-#include <array>
 #include <vector>
 
 #include <QObject>

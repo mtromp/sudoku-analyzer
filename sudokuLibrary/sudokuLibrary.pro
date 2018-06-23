@@ -30,7 +30,8 @@ SOURCES += \
     sudokucell.cpp \
     sudokucolumn.cpp \
     sudokurow.cpp \
-    sudokucellcontainer.cpp
+    sudokucellcontainer.cpp \
+    sudokubox.cpp
 
 HEADERS += \
     sudokulibrary.h \
@@ -39,7 +40,8 @@ HEADERS += \
     sudokucell.h \
     sudokucolumn.h \
     sudokurow.h \
-    sudokucellcontainer.h
+    sudokucellcontainer.h \
+    sudokubox.h
 
 unix {
     target.path = /usr/lib
