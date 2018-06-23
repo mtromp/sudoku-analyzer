@@ -1,6 +1,8 @@
 #ifndef SUDOKUROW_H
 #define SUDOKUROW_H
 
+#include "sudokucellcontainer.h"
+
 #include <array>
 #include <vector>
 
@@ -8,20 +10,18 @@
 
 class SudokuCell;
 
-class SudokuRow : public QObject
+class SudokuRow : public SudokuCellContainer
 {
     Q_OBJECT
 public:
     explicit SudokuRow(std::vector<SudokuCell*> nineCells, QObject *parent = nullptr);
+    virtual ~SudokuRow(){}
 
-    virtual std::vector<int> FixedValues();
 
 public slots:
-    int CellValueSet(int value);
 
 private:
-    std::vector<SudokuCell*> cells;
-    std::array<bool, 10> fixedValues;
+
 };
 
 #endif // SUDOKUROW_H
