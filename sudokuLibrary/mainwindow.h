@@ -5,6 +5,9 @@
 #include <QGridLayout>
 #include <QWidget>
 
+class SudokuGameScene;
+class SudokuGameView;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,7 +20,9 @@ signals:
 public slots:
 
 private:
-    QGridLayout* sudokuGrid;
+    void setupWindow(void);
+    SudokuGameView* gameView;
+    SudokuGameScene* gameScene;
 };
 
 #endif // MAINWINDOW_H
