@@ -10,7 +10,7 @@
 #include <QLabel>
 
 // 20180729: Try to use SudokuScene from the sudoku code by Wim Leers
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags)
 {
     this->gameScene = new SudokuGameScene();
     this->gameView = new SudokuGameView(this->gameScene);
@@ -21,12 +21,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     setAttribute(Qt::WA_DeleteOnClose, true);
     show();
-}
-
-MainWindow::~MainWindow()
-{
-    delete this->gameScene;
-    delete this->gameView;
 }
 
 void MainWindow::setupWindow(void)

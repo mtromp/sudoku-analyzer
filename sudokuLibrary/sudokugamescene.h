@@ -5,6 +5,7 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QSettings>
 
 class SudokuCellView;
 
@@ -12,14 +13,18 @@ class SudokuGameScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    SudokuGameScene(QObject* parent = nullptr);
+    SudokuGameScene(QAction *mainWindowPauseAction = nullptr);
     virtual ~SudokuGameScene(void);
 
     void renderBoard(QPainter* painter, const QRectF& target = QRectF());
 
+public slots:
+//    void updateSudokuCellView(int x, int y);
+
 private:
-    SudokuCellView** cellViewArray;
-    QGraphicsRectItem* theBoxes;
+//    void updateSudokuCellViewHelper(int x, int y);
+    SudokuCellView ** cellViewArray;
+    QGraphicsRectItem * theBoxes;
 };
 
 #endif // SUDOKUGAMESCENE_H

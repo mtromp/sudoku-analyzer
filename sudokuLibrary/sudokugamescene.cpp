@@ -3,17 +3,17 @@
 #include "dimensions.h"
 #include "sudokucellview.h"
 
-SudokuGameScene::SudokuGameScene(QObject *parent) : QGraphicsScene(parent)
+SudokuGameScene::SudokuGameScene(QAction * mainWindowPauseAction)
 {
+    Q_UNUSED(mainWindowPauseAction);
+
     setSceneRect(0, 0, Dimensions::sceneWidth, Dimensions::sceneHeight);
 
-    this->cellViewArray = new SudokuCellView*[9];
-    this->theBoxes = new QGraphicsRectItem [9];
+    this->cellViewArray = new SudokuCellView * [9];
+    this->theBoxes = new QGraphicsRectItem[9];
 
     for (int i = 0; i < 9; i++)
-    {
         this->cellViewArray[i] = new SudokuCellView[9];
-    }
 
     // Now add them to the scene.
     int xOffset = 0, yOffset = 0;
@@ -22,7 +22,7 @@ SudokuGameScene::SudokuGameScene(QObject *parent) : QGraphicsScene(parent)
         yOffset = 0;
         for (int j = 0; j < 9; j++) {
             yOffset += (j == 3 || j == 6) ? Dimensions::margin : 0;
-            SudokuCellView* cellView = (&this->cellViewArray[i][j]);
+            SudokuCellView* cellView = (&cellViewArray[i][j]);
             cellView->setPos(xOffset + Dimensions::margin + Dimensions::elementSize * i, yOffset + Dimensions::margin + Dimensions::elementSize * j);
             cellView->setX(i);
             cellView->setY(j);
@@ -34,7 +34,7 @@ SudokuGameScene::SudokuGameScene(QObject *parent) : QGraphicsScene(parent)
                 box_id++;
                 this->theBoxes[box_id].setRect(QRectF(xOffset + Dimensions::margin + Dimensions::elementSize * (i - 2), yOffset + Dimensions::margin + Dimensions::elementSize * (j - 2), Dimensions::elementSize * 3, Dimensions::elementSize * 3));
                 this->theBoxes[box_id].setPen(QPen(QColor(36, 156, 206), 2));
-                addItem(&this->theBoxes[box_id]);
+                addItem(&theBoxes[box_id]);
             }
         }
     }
@@ -49,10 +49,11 @@ SudokuGameScene::~SudokuGameScene()
         delete [] this->cellViewArray[i];
     }
     delete [] this->cellViewArray;
-    delete this->theBoxes;
+    delete [] this->theBoxes;
 }
 
 void SudokuGameScene::renderBoard(QPainter *painter, const QRectF &target)
 {
     render(painter, target, QRect(0, 0, Dimensions::boardSize, Dimensions::boardSize));
 }
+
