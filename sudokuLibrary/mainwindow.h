@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGridLayout>
-#include <QWidget>
 
 class MainWindow : public QMainWindow
 {
@@ -17,7 +15,7 @@ signals:
 public slots:
 
 private:
-    QGridLayout* sudokuGrid;
+
 };
 
 #endif // MAINWINDOW_H
