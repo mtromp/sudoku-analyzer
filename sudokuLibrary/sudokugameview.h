@@ -9,6 +9,7 @@ class SudokuGameView : public QGraphicsView
 
 public:
     SudokuGameView(QWidget* parent = nullptr);
+    virtual ~SudokuGameView();
 };
 
 #endif // SUDOKUGAMEVIEW_H

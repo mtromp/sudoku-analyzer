@@ -32,7 +32,8 @@ SOURCES += \
     sudokurow.cpp \
     sudokucellcontainer.cpp \
     sudokubox.cpp \
-    sudokugameview.cpp
+    sudokugameview.cpp \
+    sudokugamescene.cpp
 
 HEADERS += \
     sudokulibrary.h \
@@ -44,7 +45,8 @@ HEADERS += \
     sudokucellcontainer.h \
     sudokubox.h \
     sudokugameview.h \
-    dimensions.h
+    dimensions.h \
+    sudokugamescene.h
 
 unix {
     target.path = /usr/lib

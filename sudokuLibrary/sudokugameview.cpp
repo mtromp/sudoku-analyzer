@@ -1,4 +1,5 @@
 #include "sudokugameview.h"
+#include "sudokugamescene.h"
 
 SudokuGameView::SudokuGameView(QWidget *parent) : QGraphicsView(parent)
 {
@@ -6,5 +7,11 @@ SudokuGameView::SudokuGameView(QWidget *parent) : QGraphicsView(parent)
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setFrameStyle(QFrame::NoFrame);
 
-    this->setBackgroundBrush(QColor(114, 273, 175));
+    this->setBackgroundBrush(QColor(114, 213, 175));
+    this->setScene(new SudokuGameScene(this));
+}
+
+SudokuGameView::~SudokuGameView()
+{
+
 }
