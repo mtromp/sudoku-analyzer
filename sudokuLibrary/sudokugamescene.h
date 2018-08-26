@@ -11,6 +11,12 @@ public:
     SudokuGameScene(QObject* parent = nullptr);
     virtual ~SudokuGameScene();
 
+protected:
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent* event);
+
+private:
+    void createNineBigBoxes();
+    void createEightyOneCells();
 };
 
 #endif // SUDOKUGAMESCENE_H

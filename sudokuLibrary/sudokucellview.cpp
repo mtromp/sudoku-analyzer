@@ -2,12 +2,14 @@
 
 #include "dimensions.h"
 
+#include <QInputDialog>
 #include <QPainter>
 
-SudokuCellView::SudokuCellView()
+SudokuCellView::SudokuCellView(QGraphicsItem *parent) : QGraphicsItem(parent), theValue(0)
 {
-
+    this->setToolTip(QString::number(this->theValue));
 }
+
 SudokuCellView::~SudokuCellView()
 {
 
@@ -54,6 +56,18 @@ void SudokuCellView::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         } else {
             xoffset = xoffset + Dimensions::cellChoiceFontSize + spacing;
         }
+    }
+}
+void SudokuCellView::handleMouseEvent()
+{
+
+    bool ok;
+    int number = QInputDialog::getInt(nullptr, "Digit", "Enter Digit:", this->theValue, 1, 9, 1, &ok);
+
+    if (ok && number != 0)
+    {
+        this->theValue = number; //actually set the cell value.
+        this->setToolTip(QString::number(number));
     }
 
 }

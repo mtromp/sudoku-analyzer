@@ -4,11 +4,67 @@
 #include "sudokucellview.h"
 
 #include <QGraphicsRectItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QTransform>
 
 SudokuGameScene::SudokuGameScene(QObject *parent) : QGraphicsScene(parent)
 {
     this->setSceneRect(0, 0, Dimensions::gameSize, Dimensions::gameSize);
 
+    createNineBigBoxes();
+
+    createEightyOneCells();
+
+}
+
+SudokuGameScene::~SudokuGameScene()
+{
+
+}
+
+void SudokuGameScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    QPointF position = event->scenePos();
+    QGraphicsItem* selectedItem = itemAt(position, QTransform());
+    SudokuCellView* mySelection = dynamic_cast<SudokuCellView*>(selectedItem);
+    if (mySelection != nullptr)
+    {
+        mySelection->handleMouseEvent();
+    }
+}
+
+void SudokuGameScene::createNineBigBoxes ()
+{
+    // Place a strong outline around the 9 boxes.
+    int xoffset = Dimensions::margin;
+    int yoffset = Dimensions::margin;
+
+
+    for (int containerNumber = 1; containerNumber <=9; containerNumber++)
+    {
+        QGraphicsRectItem * rectItem = new QGraphicsRectItem();
+        rectItem->setRect(QRectF(xoffset,
+                                 yoffset,
+                                 Dimensions::cellSize * 3,
+                                 Dimensions::cellSize * 3
+                                 ));
+        rectItem->setPen(QPen(QColor(36, 156, 206), 2));
+        this->addItem(rectItem);
+
+        if ((containerNumber % 3 == 0 ))
+        {
+            xoffset = Dimensions::margin;
+            yoffset = yoffset + Dimensions::cellSize*3 + Dimensions::margin;
+        } else
+        {
+            xoffset = xoffset + Dimensions::cellSize*3 + Dimensions::margin;
+        }
+
+    }
+}
+
+void SudokuGameScene::createEightyOneCells()
+{
     int xposition = Dimensions::margin;
     int yposition = Dimensions::margin;
 
@@ -35,37 +91,4 @@ SudokuGameScene::SudokuGameScene(QObject *parent) : QGraphicsScene(parent)
             xposition = xposition + Dimensions::cellSize;
         }
     }
-
-    // Place a strong outline around the 9 boxes.
-    int xoffset = Dimensions::margin;
-    int yoffset = Dimensions::margin;
-
-    for (int containerNumber = 1; containerNumber <=9; containerNumber++)
-    {
-        QGraphicsRectItem * rectItem = new QGraphicsRectItem();
-        rectItem->setRect(QRectF(xoffset,
-                                 yoffset,
-                                 Dimensions::cellSize * 3,
-                                 Dimensions::cellSize * 3
-                                 ));
-        rectItem->setPen(QPen(QColor(36, 156, 206), 2));
-        this->addItem(rectItem);
-
-        if ((containerNumber % 3 == 0 ))
-        {
-            xoffset = Dimensions::margin;
-            yoffset = yoffset + Dimensions::cellSize*3 + Dimensions::margin;
-        } else
-        {
-            xoffset = xoffset + Dimensions::cellSize*3 + Dimensions::margin;
-        }
-
-    }
-
-
-}
-
-SudokuGameScene::~SudokuGameScene()
-{
-
 }
