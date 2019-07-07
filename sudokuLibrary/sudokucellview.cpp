@@ -26,11 +26,12 @@ void SudokuCellView::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(widget);
     Q_UNUSED(option);
 
-    if (this->theValue == 0) {
-        painter->setPen(QPen(QColor(56, 165, 211), 1));
-        painter->drawRect(0, 0, Dimensions::cellSize, Dimensions::cellSize);
+    painter->setPen(QPen(QColor(56, 165, 211), 1));
+    painter->drawRect(0, 0, Dimensions::cellSize, Dimensions::cellSize);
 
-        QFont font = QFont(painter->font());
+    QFont font = QFont(painter->font());
+
+    if (this->theValue == 0) {
         font.setPointSize(Dimensions::cellChoiceFontSize);
         painter->setFont(font);
 
@@ -60,11 +61,7 @@ void SudokuCellView::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         }
     }
     else {
-        painter->setPen(QPen(QColor(56, 165, 211), 1));
-        painter->drawRect(0, 0, Dimensions::cellSize, Dimensions::cellSize);
-
-        QFont font = QFont(painter->font());
-        font.setPointSize(20);
+        font.setPointSize(Dimensions::cellValueFontSize);
         painter->setFont(font);
         painter->setPen(QPen(QColor(203,73,104)));
 

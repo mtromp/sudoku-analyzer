@@ -6,6 +6,7 @@ public:
     static const int margin = 10;
 
     static const int cellChoiceFontSize = 12;
+    static const int cellValueFontSize = 24;
     static const int cellSize = 50;
     static const int gameSize = cellSize * 9 + 4 * margin;
 };
