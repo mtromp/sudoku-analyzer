@@ -1,4 +1,6 @@
-GOOGLETEST_DIR = /Users/Shared/gitrepositories/googletest/
+macos: GOOGLETEST_DIR = /Users/Shared/gitrepositories/googletest/
+unix: GOOGLETEST_DIR = /usr/src/googletest/
+
 include(gtest_dependency.pri)
 
 QT += testlib
