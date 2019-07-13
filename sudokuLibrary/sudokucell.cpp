@@ -47,3 +47,8 @@ int SudokuCell::SetValue(int value)
     emit CellValueSet(value);
     return 0;
 }
+
+bool SudokuCell::IsValueActive(const int value)
+{
+    return this->availableValues[value];
+}

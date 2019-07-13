@@ -85,3 +85,15 @@ TEST_F(SudokuCellTest, DisablingValueGeneratesCellValueDisabledSignal)
     QList<QVariant> arguments = spy.takeFirst();
     EXPECT_EQ(ExpectedDisableValue, arguments.at(0).toInt());
 }
+
+TEST_F(SudokuCellTest, QueryOfADisabledValueReturnsFalse)
+{
+    int disabledValue = 4;
+    cell.DisableValue(disabledValue);
+    EXPECT_FALSE(cell.IsValueActive(disabledValue));
+}
+
+TEST_F(SudokuCellTest, QueryOfAnEnabledValueReturnsTrue)
+{
+    EXPECT_TRUE(cell.IsValueActive(9));
+}

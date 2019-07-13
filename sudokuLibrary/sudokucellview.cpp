@@ -5,14 +5,16 @@
 #include <QInputDialog>
 #include <QPainter>
 
-SudokuCellView::SudokuCellView(QGraphicsItem *parent) : QGraphicsItem(parent), theValue(0)
+SudokuCellView::SudokuCellView(SudokuCell *aCell, QGraphicsItem *parent) : QGraphicsItem(parent)
+                                                                         , theValue(0)
+                                                                         , theCell(aCell)
 {
     this->setToolTip(QString::number(this->theValue));
 }
 
 SudokuCellView::~SudokuCellView()
 {
-
+    delete theCell;
 }
 
 QRectF SudokuCellView::boundingRect() const
@@ -43,14 +45,16 @@ void SudokuCellView::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         {
             painter->setPen(QPen(QColor(3,73,104)));
 
-            painter->drawText(QRectF(
-                                  xoffset,
-                                  yoffset,
-                                  Dimensions::cellChoiceFontSize,
-                                  Dimensions::cellChoiceFontSize),
-                              Qt::AlignCenter | Qt::AlignVCenter,
-                              QString::number(number)
-                              );
+            if (theCell->IsValueActive(number)) {
+                painter->drawText(QRectF(
+                                      xoffset,
+                                      yoffset,
+                                      Dimensions::cellChoiceFontSize,
+                                      Dimensions::cellChoiceFontSize),
+                                  Qt::AlignCenter | Qt::AlignVCenter,
+                                  QString::number(number)
+                                  );
+            }
             if ( number == 3 || number == 6)
             {
                 yoffset = yoffset + Dimensions::cellChoiceFontSize + spacing;
@@ -80,12 +84,17 @@ void SudokuCellView::handleMouseEvent()
 {
 
     bool ok;
-    int number = QInputDialog::getInt(nullptr, "Digit", "Enter Digit:", this->theValue, 1, 9, 1, &ok);
+    int number = QInputDialog::getInt(nullptr
+                                     , "Digit"
+                                     , "Enter Digit:"
+                                     , this->theValue
+                                     , 1, 9, 1, &ok);
 
     if (ok && number != 0)
     {
-        this->theValue = number; //actually set the cell value.
-        this->setToolTip(QString::number(number));
+        if (0 == this->theCell->SetValue(number)) {
+            this->theValue = number; //actually set the cell value.
+            this->setToolTip(QString::number(number));
+        }
     }
-
 }

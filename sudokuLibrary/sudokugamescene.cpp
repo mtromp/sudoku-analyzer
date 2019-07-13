@@ -70,7 +70,8 @@ void SudokuGameScene::createEightyOneCells()
 
     for (int cellNumber = 1; cellNumber <= 81; cellNumber++)
     {
-        SudokuCellView* cellView = new SudokuCellView();
+        SudokuCell* theCell = new SudokuCell();
+        SudokuCellView* cellView = new SudokuCellView(theCell);
         cellView->setPos(xposition, yposition);
 
         this->addItem(cellView);

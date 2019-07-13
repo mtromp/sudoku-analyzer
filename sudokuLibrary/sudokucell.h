@@ -16,6 +16,7 @@ public:
     virtual std::vector<int> AvailableValues();
     virtual int DisableValue(int value);
     virtual int SetValue(int value);
+    virtual bool IsValueActive(const int value);
 
 signals:
     void CellValueDisabled(int value);

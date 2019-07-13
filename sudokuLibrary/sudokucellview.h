@@ -1,12 +1,15 @@
 #ifndef SUDOKUCELLVIEW_H
 #define SUDOKUCELLVIEW_H
 
+#include "sudokucell.h"
+
 #include <QGraphicsItem>
 
 class SudokuCellView : public QGraphicsItem
 {
 public:
-    SudokuCellView(QGraphicsItem* parent = nullptr);
+    SudokuCellView(SudokuCell* aCell = nullptr
+                  , QGraphicsItem* parent = nullptr);
     virtual ~SudokuCellView();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -16,6 +19,7 @@ public:
 
 private:
     int theValue;
+    SudokuCell* theCell;
 };
 
 #endif // SUDOKUCELLVIEW_H
