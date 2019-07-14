@@ -15,6 +15,7 @@ CONFIG += testcase
 HEADERS +=  tst_sudokutestcase.h
 
 SOURCES +=  main.cpp \
+    tst_cellcontainermapper.cpp \
     tst_sudokucell.cpp \
     tst_sudokucellcontainer.cpp \
     tst_cellcontainerintegration.cpp

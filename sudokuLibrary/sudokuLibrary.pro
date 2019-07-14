@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cellcontainermapper.cpp \
     sudokulibrary.cpp \
     mainwindow.cpp \
     sudokucell.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
     sudokucellview.cpp
 
 HEADERS += \
+    cellcontainermapper.h \
     sudokulibrary.h \
     sudokulibrary_global.h \
     mainwindow.h \
