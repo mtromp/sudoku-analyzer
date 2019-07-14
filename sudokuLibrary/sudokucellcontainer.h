@@ -12,8 +12,12 @@ class SudokuCellContainer : public QObject
 {
     Q_OBJECT
 public:
-    explicit SudokuCellContainer(std::vector<SudokuCell*> nineCells, QObject *parent = nullptr);
+    explicit SudokuCellContainer(std::array<SudokuCell*, 9> nineCells, QObject *parent = nullptr);
+    SudokuCellContainer(QObject *parent = nullptr);
+
     virtual ~SudokuCellContainer(){}
+
+    void AssignCell(int position, SudokuCell* theCell);
 
     virtual std::vector<int> FixedValues();
 signals:
@@ -22,7 +26,7 @@ public slots:
     int CellValueSet(int value);
 
 private:
-    std::vector<SudokuCell*> cells;
+    std::array<SudokuCell*, 9> cells;
     std::array<bool, 10> fixedValues;
 };
 

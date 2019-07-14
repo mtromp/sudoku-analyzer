@@ -1,7 +1,10 @@
 #ifndef SUDOKUGAMESCENE_H
 #define SUDOKUGAMESCENE_H
 
+#include "sudokucellcontainer.h"
 #include <QGraphicsScene>
+
+#include <array>
 
 class SudokuGameScene : public QGraphicsScene
 {
@@ -17,6 +20,15 @@ protected:
 private:
     void createNineBigBoxes();
     void createEightyOneCells();
+    void createCellContainers();
+
+    void addCellToBoxes(int theCell, int cellNumber);
+
+
+    std::array<SudokuCellContainer*, 9> sudokuBoxes;
+    std::array<SudokuCellContainer*, 9> sudokuRows;
+    std::array<SudokuCellContainer*, 9> sudokuColumns;
+
 };
 
 #endif // SUDOKUGAMESCENE_H

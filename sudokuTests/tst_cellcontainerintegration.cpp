@@ -4,17 +4,18 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <array>
 #include <vector>
 
 using namespace testing;
 
 TEST(IntegrateCellContainer, CellSetValueChangesContainerFixedValues)
 {
-    std::vector<SudokuCell*> nineCells;
+    std::array<SudokuCell*, 9> nineCells;
     for (int i = 0; i < 9; i++)
     {
         SudokuCell* cell = new SudokuCell;
-        nineCells.push_back(&(*cell));
+        nineCells[i] = cell;
     }
     SudokuCellContainer container(nineCells);
     for (auto it = nineCells.begin(); it != nineCells.end(); ++it)

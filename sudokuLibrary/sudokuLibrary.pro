@@ -28,10 +28,7 @@ SOURCES += \
     sudokulibrary.cpp \
     mainwindow.cpp \
     sudokucell.cpp \
-    sudokucolumn.cpp \
-    sudokurow.cpp \
     sudokucellcontainer.cpp \
-    sudokubox.cpp \
     sudokugameview.cpp \
     sudokugamescene.cpp \
     sudokucellview.cpp
@@ -41,10 +38,7 @@ HEADERS += \
     sudokulibrary_global.h \
     mainwindow.h \
     sudokucell.h \
-    sudokucolumn.h \
-    sudokurow.h \
     sudokucellcontainer.h \
-    sudokubox.h \
     sudokugameview.h \
     dimensions.h \
     sudokugamescene.h \

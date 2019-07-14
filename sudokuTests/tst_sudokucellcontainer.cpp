@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <array>
 #include <vector>
 
 using namespace testing;
@@ -31,7 +32,7 @@ protected:
         for (int i = 0; i < 9; i++)
         {
             MockSudokuCell* cell = new MockSudokuCell;
-            nineCells.push_back(&(*cell));
+            nineCells[i] = cell;
         }
     }
     ~SudokuCellContainerTest()
@@ -42,7 +43,7 @@ protected:
             delete cell;
         }
     }
-    std::vector<SudokuCell*> nineCells;
+    std::array<SudokuCell*, 9> nineCells;
 };
 
 TEST_F(SudokuCellContainerTest, ContainerCellValueSetDisablesValueInAllCells)

@@ -1,10 +1,20 @@
 #include "sudokucellcontainer.h"
 #include "sudokucell.h"
 
-SudokuCellContainer::SudokuCellContainer(std::vector<SudokuCell*> nineCells, QObject *parent) : QObject(parent)
+SudokuCellContainer::SudokuCellContainer(std::array<SudokuCell*, 9> nineCells, QObject *parent) : QObject(parent)
 {
     this->cells = nineCells;
     this->fixedValues = {{false,false,false,false,false,false,false,false,false,false}};
+}
+
+SudokuCellContainer::SudokuCellContainer(QObject *parent) : QObject(parent)
+{
+    this->fixedValues = {{false,false,false,false,false,false,false,false,false,false}};
+}
+
+void SudokuCellContainer::AssignCell(int position, SudokuCell *theCell)
+{
+    this->cells[position] = theCell;
 }
 
 int SudokuCellContainer::CellValueSet(int value)
