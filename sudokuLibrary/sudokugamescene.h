@@ -4,6 +4,7 @@
 #include "sudokucellcontainer.h"
 #include "cellcontainermapper.h"
 #include <QGraphicsScene>
+#include <QObject>
 
 #include <array>
 

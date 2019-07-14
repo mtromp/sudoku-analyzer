@@ -104,6 +104,7 @@ void SudokuGameScene::createCellContainers()
     {
         sudokuRows[i] = new SudokuCellContainer();
         sudokuColumns[i] = new SudokuCellContainer();
+        sudokuBoxes[i] = new SudokuCellContainer();
     }
 }
 
@@ -119,4 +120,9 @@ void SudokuGameScene::addCellToBoxes(SudokuCell *theCell, int cellNumber)
     SudokuCellContainer* columnContainer = sudokuColumns[columnNumber-1];
     columnContainer->AddCell(theCell);
     QObject::connect(theCell, SIGNAL(CellValueSet(int)), columnContainer, SLOT(CellValueSet(int)));
+
+    int boxNumber = mapper.GetBox(cellNumber);
+    SudokuCellContainer* boxContainer = sudokuBoxes[boxNumber-1];
+    boxContainer->AddCell(theCell);
+    QObject::connect(theCell, SIGNAL(CellValueSet(int)), boxContainer, SLOT(CellValueSet(int)));
 }
