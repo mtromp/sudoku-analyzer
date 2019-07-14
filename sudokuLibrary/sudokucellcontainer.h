@@ -17,7 +17,7 @@ public:
 
     virtual ~SudokuCellContainer(){}
 
-    void AssignCell(int position, SudokuCell* theCell);
+    void AddCell(SudokuCell* theCell);
 
     virtual std::vector<int> FixedValues();
 signals:
@@ -26,6 +26,7 @@ public slots:
     int CellValueSet(int value);
 
 private:
+    int nextCellPosition;
     std::array<SudokuCell*, 9> cells;
     std::array<bool, 10> fixedValues;
 };

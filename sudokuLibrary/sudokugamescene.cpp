@@ -73,6 +73,8 @@ void SudokuGameScene::createEightyOneCells()
     for (int cellNumber = 1; cellNumber <= 81; cellNumber++)
     {
         SudokuCell* theCell = new SudokuCell();
+        addCellToBoxes(theCell, cellNumber);
+
         SudokuCellView* cellView = new SudokuCellView(theCell);
         cellView->setPos(xposition, yposition);
 
@@ -98,20 +100,17 @@ void SudokuGameScene::createEightyOneCells()
 
 void SudokuGameScene::createCellContainers()
 {
-
+    for(int i=0; i < 9; ++i)
+    {
+        sudokuRows[i] = new SudokuCellContainer();
+    }
 }
 
-void SudokuGameScene::addCellToBoxes(int theCell, int cellNumber)
+void SudokuGameScene::addCellToBoxes(SudokuCell *theCell, int cellNumber)
 {
-    Q_UNUSED(theCell);
-    int rowNumber = 0;
-    int columnNumber = 0;
-    int boxNumber = 0;
-
-    rowNumber = cellNumber / 10;  //row = 0 for cells 1,2,3,4,5,6,7,8,9
-    columnNumber = (cellNumber % 9) - 1; // column = 0 for cells 1,10,19,28,37,46....
-
-    //rowNumber 0 goes into boxes 1, 2, 3
-    //column 0 goes into boxes 1, 4, 7
-    boxNumber =  rowNumber; // box = 0 for cells 1,2,3,10,11,12,28,29,30
+    int rowNumber = mapper.GetRow(cellNumber);
+    SudokuCellContainer* rowContainer = sudokuRows[rowNumber-1];
+    rowContainer->AddCell(theCell);
+    // Connect cell signal to container slot
+    QObject::connect(theCell, SIGNAL(CellValueSet(int)), rowContainer, SLOT(CellValueSet(int)));
 }

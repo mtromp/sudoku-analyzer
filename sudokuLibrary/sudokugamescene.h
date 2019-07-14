@@ -2,6 +2,7 @@
 #define SUDOKUGAMESCENE_H
 
 #include "sudokucellcontainer.h"
+#include "cellcontainermapper.h"
 #include <QGraphicsScene>
 
 #include <array>
@@ -22,9 +23,9 @@ private:
     void createEightyOneCells();
     void createCellContainers();
 
-    void addCellToBoxes(int theCell, int cellNumber);
+    void addCellToBoxes(SudokuCell* theCell, int cellNumber);
 
-
+    CellContainerMapper mapper;
     std::array<SudokuCellContainer*, 9> sudokuBoxes;
     std::array<SudokuCellContainer*, 9> sudokuRows;
     std::array<SudokuCellContainer*, 9> sudokuColumns;

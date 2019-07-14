@@ -10,11 +10,13 @@ SudokuCellContainer::SudokuCellContainer(std::array<SudokuCell*, 9> nineCells, Q
 SudokuCellContainer::SudokuCellContainer(QObject *parent) : QObject(parent)
 {
     this->fixedValues = {{false,false,false,false,false,false,false,false,false,false}};
+    this->nextCellPosition = 0;
 }
 
-void SudokuCellContainer::AssignCell(int position, SudokuCell *theCell)
+void SudokuCellContainer::AddCell(SudokuCell *theCell)
 {
-    this->cells[position] = theCell;
+    this->cells[this->nextCellPosition] = theCell;
+    ++this->nextCellPosition;
 }
 
 int SudokuCellContainer::CellValueSet(int value)
