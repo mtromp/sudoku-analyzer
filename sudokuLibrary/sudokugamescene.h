@@ -26,10 +26,9 @@ private:
     void addCellToBoxes(SudokuCell* theCell, int cellNumber);
 
     CellContainerMapper mapper;
-    std::array<SudokuCellContainer*, 9> sudokuBoxes;
     std::array<SudokuCellContainer*, 9> sudokuRows;
     std::array<SudokuCellContainer*, 9> sudokuColumns;
-
+    std::array<SudokuCellContainer*, 9> sudokuBoxes;
 };
 
 #endif // SUDOKUGAMESCENE_H
