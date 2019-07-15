@@ -9,3 +9,6 @@ Merged pull request that closes Issue #1.
 
 ## 2018-08-12:
 Committed changes that display the grid correctly.
+
+## 2019-07-14:
+Basic functioning working on Mac. Linux does not repaint the scene.
