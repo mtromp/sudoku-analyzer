@@ -19,14 +19,14 @@ public:
 
     void AddCell(SudokuCell* theCell);
 
-    virtual std::vector<int> FixedValues();
+    virtual std::vector<unsigned int> FixedValues();
 signals:
 
 public slots:
-    int CellValueSet(int value);
+    int CellValueSet(unsigned int value);
 
 private:
-    int nextCellPosition;
+    unsigned int nextCellPosition;
     std::array<SudokuCell*, 9> cells;
     std::array<bool, 10> fixedValues;
 };

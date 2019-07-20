@@ -5,10 +5,10 @@ SudokuCell::SudokuCell()
     this->availableValues = {{true,true,true,true,true,true,true,true,true,true}};
 }
 
-std::vector<int> SudokuCell::AvailableValues()
+std::vector<unsigned int> SudokuCell::AvailableValues()
 {
-    std::vector<int> valueVector;
-    for (int i = 1; i < 10; i++)
+    std::vector<unsigned int> valueVector;
+    for (unsigned int i = 1; i < 10; i++)
     {
         if (this->availableValues[i])
         {
@@ -18,7 +18,7 @@ std::vector<int> SudokuCell::AvailableValues()
     return valueVector;
 }
 
-int SudokuCell::DisableValue(int value)
+int SudokuCell::DisableValue(const unsigned int value)
 {
     this->availableValues[value] = false;
     if (this->AvailableValues().size() == 0)
@@ -30,12 +30,12 @@ int SudokuCell::DisableValue(int value)
     return 0;
 }
 
-int SudokuCell::SetValue(int value)
+int SudokuCell::SetValue(const unsigned int value)
 {
     if (!this->availableValues[value]){
         return -1;
     }
-    for (int i = 1; i < 10; i++)
+    for (unsigned int i = 1; i < 10; i++)
     {
         if (i == value)
         {
@@ -48,7 +48,7 @@ int SudokuCell::SetValue(int value)
     return 0;
 }
 
-bool SudokuCell::IsValueActive(const int value)
+bool SudokuCell::IsValueActive(const unsigned int value)
 {
     return this->availableValues[value];
 }

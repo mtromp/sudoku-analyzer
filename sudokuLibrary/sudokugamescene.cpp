@@ -32,6 +32,7 @@ void SudokuGameScene::mousePressEvent(QGraphicsSceneMouseEvent * event)
     if (mySelection != nullptr)
     {
         mySelection->handleMouseEvent();
+        this->update(0, 0, Dimensions::gameSize, Dimensions::gameSize);
     }
 }
 
@@ -70,7 +71,7 @@ void SudokuGameScene::createEightyOneCells()
     int xposition = Dimensions::margin;
     int yposition = Dimensions::margin;
 
-    for (int cellNumber = 1; cellNumber <= 81; cellNumber++)
+    for (unsigned int cellNumber = 1; cellNumber <= 81; cellNumber++)
     {
         SudokuCell* theCell = new SudokuCell();
         addCellToBoxes(theCell, cellNumber);
@@ -100,7 +101,7 @@ void SudokuGameScene::createEightyOneCells()
 
 void SudokuGameScene::createCellContainers()
 {
-    for(int i=0; i < 9; ++i)
+    for(unsigned int i=0; i < 9; ++i)
     {
         sudokuRows[i] = new SudokuCellContainer();
         sudokuColumns[i] = new SudokuCellContainer();
@@ -108,21 +109,21 @@ void SudokuGameScene::createCellContainers()
     }
 }
 
-void SudokuGameScene::addCellToBoxes(SudokuCell *theCell, int cellNumber)
+void SudokuGameScene::addCellToBoxes(SudokuCell *theCell, unsigned int cellNumber)
 {
-    int rowNumber = mapper.GetRow(cellNumber);
+    unsigned int rowNumber = mapper.GetRow(cellNumber);
     SudokuCellContainer* rowContainer = sudokuRows[rowNumber-1];
     rowContainer->AddCell(theCell);
     // Connect cell signal to container slot
-    QObject::connect(theCell, SIGNAL(CellValueSet(int)), rowContainer, SLOT(CellValueSet(int)));
+    QObject::connect(theCell, SIGNAL(CellValueSet(unsigned int)), rowContainer, SLOT(CellValueSet(unsigned int)));
 
-    int columnNumber = mapper.GetColumn(cellNumber);
+    unsigned int columnNumber = mapper.GetColumn(cellNumber);
     SudokuCellContainer* columnContainer = sudokuColumns[columnNumber-1];
     columnContainer->AddCell(theCell);
-    QObject::connect(theCell, SIGNAL(CellValueSet(int)), columnContainer, SLOT(CellValueSet(int)));
+    QObject::connect(theCell, SIGNAL(CellValueSet(unsigned int)), columnContainer, SLOT(CellValueSet(unsigned int)));
 
-    int boxNumber = mapper.GetBox(cellNumber);
+    unsigned int boxNumber = mapper.GetBox(cellNumber);
     SudokuCellContainer* boxContainer = sudokuBoxes[boxNumber-1];
     boxContainer->AddCell(theCell);
-    QObject::connect(theCell, SIGNAL(CellValueSet(int)), boxContainer, SLOT(CellValueSet(int)));
+    QObject::connect(theCell, SIGNAL(CellValueSet(unsigned int)), boxContainer, SLOT(CellValueSet(unsigned int)));
 }

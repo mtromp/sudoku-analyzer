@@ -7,14 +7,14 @@ class CellContainerMapper
 {
 public:
     CellContainerMapper();
-    int GetRow(int cellNumber);
-    int GetColumn(int cellNumber);
-    int GetBox(int cellNumber);
+    unsigned int GetRow(const unsigned int cellNumber);
+    unsigned int GetColumn(const unsigned int cellNumber);
+    unsigned int GetBox(const unsigned int cellNumber);
 
 private:
-    std::array<int, 81> rowMapper;
-    std::array<int, 81> columnMapper;
-    std::array<int, 81> boxMapper;
+    std::array<unsigned int, 81> rowMapper;
+    std::array<unsigned int, 81> columnMapper;
+    std::array<unsigned int, 81> boxMapper;
     void InitRowMapper();
     void InitColumnMapper();
     void InitBoxMapper();

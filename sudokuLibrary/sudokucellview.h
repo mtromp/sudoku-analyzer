@@ -18,7 +18,7 @@ public:
     void handleMouseEvent();
 
 private:
-    int theValue;
+    unsigned int theValue;
     SudokuCell* theCell;
 };
 

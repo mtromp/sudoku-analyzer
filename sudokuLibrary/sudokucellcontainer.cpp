@@ -19,7 +19,7 @@ void SudokuCellContainer::AddCell(SudokuCell *theCell)
     ++this->nextCellPosition;
 }
 
-int SudokuCellContainer::CellValueSet(int value)
+int SudokuCellContainer::CellValueSet(unsigned int value)
 {
     int retVal = 0;
     QObject* signalingObject = this->sender();
@@ -45,10 +45,10 @@ int SudokuCellContainer::CellValueSet(int value)
     return retVal;
 }
 
-std::vector<int> SudokuCellContainer::FixedValues()
+std::vector<unsigned int> SudokuCellContainer::FixedValues()
 {
-    std::vector<int> fixedVector;
-    for (int i = 1; i < 10; i++)
+    std::vector<unsigned int> fixedVector;
+    for (unsigned int i = 1; i < 10; i++)
     {
         if (this->fixedValues[i])
         {

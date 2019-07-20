@@ -18,9 +18,9 @@ using namespace testing;
 class MockSudokuCell : public SudokuCell
 {
 public:
-    MOCK_METHOD0(AvailableValues, std::vector<int>());
-    MOCK_METHOD1(DisableValue, int(int value));
-    MOCK_METHOD1(SetValue, int(int value));
+    MOCK_METHOD0(AvailableValues, std::vector<unsigned int>());
+    MOCK_METHOD1(DisableValue, int(unsigned int value));
+    MOCK_METHOD1(SetValue, int(unsigned int value));
     virtual ~MockSudokuCell(){}
 };
 
@@ -29,7 +29,7 @@ class SudokuCellContainerTest : public Test
 protected:
     SudokuCellContainerTest()
     {
-        for (int i = 0; i < 9; i++)
+        for (unsigned int i = 0; i < 9; i++)
         {
             MockSudokuCell* cell = new MockSudokuCell;
             nineCells[i] = cell;
@@ -49,7 +49,7 @@ protected:
 TEST_F(SudokuCellContainerTest, ContainerCellValueSetDisablesValueInAllCells)
 {
     SudokuCellContainer container(nineCells);
-    int valueToDisable = 4;
+    unsigned int valueToDisable = 4;
 
     for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
     {
@@ -60,8 +60,8 @@ TEST_F(SudokuCellContainerTest, ContainerCellValueSetDisablesValueInAllCells)
 
 TEST_F(SudokuCellContainerTest, ContainerCellValueSetCapturesColumnFixedValues)
 {
-    int expectedContainerFixedValue = 5;
-    std::vector<int> expectedVector = {expectedContainerFixedValue};
+    unsigned int expectedContainerFixedValue = 5;
+    std::vector<unsigned int> expectedVector = {expectedContainerFixedValue};
 
     SudokuCellContainer container(nineCells);
 
@@ -77,7 +77,7 @@ TEST_F(SudokuCellContainerTest, ContainerCellValueSetCapturesColumnFixedValues)
 
 TEST_F(SudokuCellContainerTest, ContainerCellValueSetDoesNotCallDisableValueWhenAlreadyFixed)
 {
-    int expectedContainerFixedValue = 5;
+    unsigned int expectedContainerFixedValue = 5;
 
     SudokuCellContainer container(nineCells);
 
@@ -92,11 +92,11 @@ TEST_F(SudokuCellContainerTest, ContainerCellValueSetDoesNotCallDisableValueWhen
 
 TEST_F(SudokuCellContainerTest, FixedValueNotSetIfCellReturnsDisableValueError)
 {
-    int willNotSetValue = 5;
-    std::vector<int> expectedVector = {};
+    unsigned int willNotSetValue = 5;
+    std::vector<unsigned int> expectedVector = {};
     SudokuCellContainer container(nineCells);
 
-    int iteratorCount = 0;
+    unsigned int iteratorCount = 0;
     for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
     {
         if (willNotSetValue == iteratorCount)
@@ -119,11 +119,11 @@ TEST_F(SudokuCellContainerTest, FixedValueNotSetIfCellReturnsDisableValueError)
 
 TEST_F(SudokuCellContainerTest, CellSetValueReturnsErrorIfCellReturnsDisableValueError)
 {
-    int willNotSetValue = 5;
+    unsigned int willNotSetValue = 5;
 
     SudokuCellContainer container(nineCells);
 
-    int iteratorCount = 0;
+    unsigned int iteratorCount = 0;
     for (auto it = nineCells.begin(); it != nineCells.end(); ++it)
     {
         if (willNotSetValue == iteratorCount)

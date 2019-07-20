@@ -13,14 +13,14 @@ class SudokuCell : public QObject
 public:
     SudokuCell();
     virtual ~SudokuCell(){}
-    virtual std::vector<int> AvailableValues();
-    virtual int DisableValue(int value);
-    virtual int SetValue(int value);
-    virtual bool IsValueActive(const int value);
+    virtual std::vector<unsigned int> AvailableValues();
+    virtual int DisableValue(const unsigned int value);
+    virtual int SetValue(const unsigned int value);
+    virtual bool IsValueActive(const unsigned int value);
 
 signals:
-    void CellValueDisabled(int value);
-    void CellValueSet(int value);
+    void CellValueDisabled(unsigned int value);
+    void CellValueSet(unsigned int value);
 
 private:
     std::array<bool, 10> availableValues;

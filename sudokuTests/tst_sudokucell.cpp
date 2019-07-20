@@ -18,14 +18,14 @@ protected:
 
 TEST_F(SudokuCellTest, SudokuCellReturnsAvailableValues)
 {
-    std::vector<int> expectedArray = {1,2,3,4,5,6,7,8,9};
+    std::vector<unsigned int> expectedArray = {1,2,3,4,5,6,7,8,9};
 
     EXPECT_EQ(expectedArray, cell.AvailableValues());
 }
 
 TEST_F(SudokuCellTest, DisablingAValueRemovesItFromTheAvailableValuesList)
 {
-    std::vector<int> expectedArray = {1,2,3,5,6,7,8,9};
+    std::vector<unsigned int> expectedArray = {1,2,3,5,6,7,8,9};
 
     cell.DisableValue(4);
 
@@ -34,7 +34,7 @@ TEST_F(SudokuCellTest, DisablingAValueRemovesItFromTheAvailableValuesList)
 
 TEST_F(SudokuCellTest, DisablingTheLastValueFromACellReturnsAnError)
 {
-    for (int i = 1; i < 9; i++)
+    for (unsigned int i = 1; i < 9; i++)
     {
         EXPECT_EQ(0, cell.DisableValue(i));
     }
@@ -43,8 +43,8 @@ TEST_F(SudokuCellTest, DisablingTheLastValueFromACellReturnsAnError)
 
 TEST_F(SudokuCellTest, DisablingTheLastValueFromACellRetainsValueAsAvailable)
 {
-    std::vector<int> expectedVector = {9};
-    for (int i = 1; i < 9; i++)
+    std::vector<unsigned int> expectedVector = {9};
+    for (unsigned int i = 1; i < 9; i++)
     {
         EXPECT_EQ(0, cell.DisableValue(i));
     }
@@ -54,7 +54,7 @@ TEST_F(SudokuCellTest, DisablingTheLastValueFromACellRetainsValueAsAvailable)
 
 TEST_F(SudokuCellTest, SettingAValueReturnsOneAvailableValue)
 {
-    std::vector<int> expectedVector = {4};
+    std::vector<unsigned int> expectedVector = {4};
     EXPECT_EQ(0, cell.SetValue(4));
 
     EXPECT_EQ(expectedVector, cell.AvailableValues());
@@ -62,8 +62,8 @@ TEST_F(SudokuCellTest, SettingAValueReturnsOneAvailableValue)
 
 TEST_F(SudokuCellTest, SettingAValueGeneratesCellValueSetSignal)
 {
-    QSignalSpy spy(&cell, SIGNAL(CellValueSet(int)));
-    int ExpectedSetValue = 5;
+    QSignalSpy spy(&cell, SIGNAL(CellValueSet(unsigned int)));
+    unsigned int ExpectedSetValue = 5;
     cell.SetValue(ExpectedSetValue);
     EXPECT_EQ(1, spy.count());
     QList<QVariant> arguments = spy.takeFirst();
@@ -78,8 +78,8 @@ TEST_F(SudokuCellTest, AttemptingToSetDisabledValueReturnsError)
 
 TEST_F(SudokuCellTest, DisablingValueGeneratesCellValueDisabledSignal)
 {
-    QSignalSpy spy(&cell, SIGNAL(CellValueDisabled(int)));
-    int ExpectedDisableValue = 4;
+    QSignalSpy spy(&cell, SIGNAL(CellValueDisabled(unsigned int)));
+    unsigned int ExpectedDisableValue = 4;
     cell.DisableValue(ExpectedDisableValue);
     EXPECT_EQ(1, spy.count());
     QList<QVariant> arguments = spy.takeFirst();
@@ -88,7 +88,7 @@ TEST_F(SudokuCellTest, DisablingValueGeneratesCellValueDisabledSignal)
 
 TEST_F(SudokuCellTest, QueryOfADisabledValueReturnsFalse)
 {
-    int disabledValue = 4;
+    unsigned int disabledValue = 4;
     cell.DisableValue(disabledValue);
     EXPECT_FALSE(cell.IsValueActive(disabledValue));
 }

@@ -41,7 +41,7 @@ void SudokuCellView::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         int xoffset = spacing;
         int yoffset = spacing;
 
-        for(int number = 1; number <= 9; number++)
+        for(unsigned int number = 1; number <= 9; number++)
         {
             painter->setPen(QPen(QColor(3,73,104)));
 
@@ -85,15 +85,15 @@ void SudokuCellView::handleMouseEvent()
 
     bool ok;
     int number = QInputDialog::getInt(nullptr
-                                     , "Digit"
-                                     , "Enter Digit:"
-                                     , this->theValue
-                                     , 1, 9, 1, &ok);
+                                             , "Digit"
+                                             , "Enter Digit:"
+                                             , static_cast<int>(this->theValue)
+                                             , 1, 9, 1, &ok);
 
     if (ok && number != 0)
     {
-        if (0 == this->theCell->SetValue(number)) {
-            this->theValue = number; //actually set the cell value.
+        if (0 == this->theCell->SetValue(static_cast<unsigned int>(number))) {
+            this->theValue = static_cast<unsigned int>(number); //actually set the cell value.
             this->setToolTip(QString::number(number));
         }
     }

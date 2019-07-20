@@ -24,7 +24,7 @@ private:
     void createEightyOneCells();
     void createCellContainers();
 
-    void addCellToBoxes(SudokuCell* theCell, int cellNumber);
+    void addCellToBoxes(SudokuCell* theCell, unsigned int cellNumber);
 
     CellContainerMapper mapper;
     std::array<SudokuCellContainer*, 9> sudokuRows;
