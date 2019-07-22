@@ -67,7 +67,7 @@ TEST_F(SudokuCellTest, SettingAValueGeneratesCellValueSetSignal)
     cell.SetValue(ExpectedSetValue);
     EXPECT_EQ(1, spy.count());
     QList<QVariant> arguments = spy.takeFirst();
-    EXPECT_EQ(ExpectedSetValue, arguments.at(0).toInt());
+    EXPECT_EQ(ExpectedSetValue, arguments.at(0).toUInt());
 }
 
 TEST_F(SudokuCellTest, AttemptingToSetDisabledValueReturnsError)
@@ -83,7 +83,7 @@ TEST_F(SudokuCellTest, DisablingValueGeneratesCellValueDisabledSignal)
     cell.DisableValue(ExpectedDisableValue);
     EXPECT_EQ(1, spy.count());
     QList<QVariant> arguments = spy.takeFirst();
-    EXPECT_EQ(ExpectedDisableValue, arguments.at(0).toInt());
+    EXPECT_EQ(ExpectedDisableValue, arguments.at(0).toUInt());
 }
 
 TEST_F(SudokuCellTest, QueryOfADisabledValueReturnsFalse)
